@@ -19,17 +19,26 @@ async function doPull(count) {
 function render(results, summary) {
   const resultsEl = document.getElementById("results");
   const summaryEl = document.getElementById("summary");
-  resultsEl.innerHTML = results
-    .map(
-      (r) => `
-      <div class="card rarity-${r.rarity}">
-        <div class="name">${r.name}</div>
-        <div class="rarity">${"★".repeat(r.rarity)}</div>
-      </div>
-    `
-    )
-    .join("");
-  summaryEl.textContent = `3★: ${summary.pulled3} | 4★: ${summary.pulled4} | 5★: ${summary.pulled5}`;
+  
+  // Clear previous results
+  resultsEl.innerHTML = "";
+  
+  // Create cards with animation delay
+  results.forEach((r, index) => {
+    const card = document.createElement("div");
+    card.className = `card rarity-${r.rarity} card-animate`;
+    card.style.animationDelay = `${index * 0.1}s`;
+    card.innerHTML = `
+      <div class="name">${r.name}</div>
+      <div class="rarity">${"★".repeat(r.rarity)}</div>
+    `;
+    resultsEl.appendChild(card);
+  });
+  
+  // Update summary with delay
+  setTimeout(() => {
+    summaryEl.textContent = `3★: ${summary.pulled3} | 4★: ${summary.pulled4} | 5★: ${summary.pulled5}`;
+  }, results.length * 100 + 200);
 }
 
 document.getElementById("pull1").addEventListener("click", async () => {

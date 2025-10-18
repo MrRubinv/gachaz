@@ -125,6 +125,28 @@ button:hover {
   border-radius: 10px;
   padding: 12px;
   border: 1px solid #1e2433;
+  opacity: 0;
+  transform: translateY(20px) scale(0.9);
+  transition: all 0.3s ease;
+}
+
+.card-animate {
+  animation: cardAppear 0.6s ease-out forwards;
+}
+
+@keyframes cardAppear {
+  0% {
+    opacity: 0;
+    transform: translateY(20px) scale(0.9);
+  }
+  50% {
+    opacity: 0.8;
+    transform: translateY(-5px) scale(1.05);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
 .card .name {
@@ -143,14 +165,34 @@ button:hover {
 
 .rarity-5 {
   box-shadow: 0 0 0 2px var(--rarity5) inset;
+  animation: cardAppear 0.6s ease-out forwards, rarity5Glow 2s ease-in-out infinite;
 }
 
 .rarity-4 {
   box-shadow: 0 0 0 2px var(--rarity4) inset;
+  animation: cardAppear 0.6s ease-out forwards, rarity4Glow 1.5s ease-in-out infinite;
 }
 
 .rarity-3 {
   box-shadow: 0 0 0 2px var(--rarity3) inset;
+}
+
+@keyframes rarity5Glow {
+  0%, 100% {
+    box-shadow: 0 0 0 2px var(--rarity5) inset, 0 0 20px rgba(255, 209, 102, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 0 2px var(--rarity5) inset, 0 0 30px rgba(255, 209, 102, 0.6);
+  }
+}
+
+@keyframes rarity4Glow {
+  0%, 100% {
+    box-shadow: 0 0 0 2px var(--rarity4) inset, 0 0 15px rgba(167, 139, 250, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 0 2px var(--rarity4) inset, 0 0 25px rgba(167, 139, 250, 0.5);
+  }
 }
 
 .summary {
