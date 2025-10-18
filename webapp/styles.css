@@ -1,0 +1,89 @@
+:root {
+  --bg: #0f1115;
+  --panel: #151923;
+  --text: #e6e6e6;
+  --accent: #7aa2f7;
+  --rarity5: #ffd166;
+  --rarity4: #a78bfa;
+  --rarity3: #7dd3fc;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+h1 {
+  margin-top: 0;
+}
+
+.controls {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+button {
+  background: var(--accent);
+  border: none;
+  color: #0b0f19;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.results {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 12px;
+}
+
+.card {
+  background: var(--panel);
+  border-radius: 10px;
+  padding: 12px;
+  border: 1px solid #1e2433;
+}
+
+.card .name {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.card .rarity {
+  margin-top: 8px;
+}
+
+.card .pity {
+  margin-top: 8px;
+  opacity: 0.7;
+}
+
+.rarity-5 {
+  box-shadow: 0 0 0 2px var(--rarity5) inset;
+}
+
+.rarity-4 {
+  box-shadow: 0 0 0 2px var(--rarity4) inset;
+}
+
+.rarity-3 {
+  box-shadow: 0 0 0 2px var(--rarity3) inset;
+}
+
+.summary {
+  margin-top: 16px;
+  font-weight: 600;
+}
+
+
