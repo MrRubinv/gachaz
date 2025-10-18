@@ -5,8 +5,8 @@ from telegram.ext import Application, CommandHandler, CallbackContext
 
 
 def get_webapp_url() -> str:
-    # Use Railway production URL
-    return os.environ.get("WEBAPP_URL", "https://gachaz-production.up.railway.app/")
+    # Use Render production URL
+    return os.environ.get("WEBAPP_URL", "https://gachaz.onrender.com/")
 
 
 async def start(update: Update, context: CallbackContext) -> None:
