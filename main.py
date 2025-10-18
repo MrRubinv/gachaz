@@ -38,6 +38,10 @@ app.add_middleware(
 )
 
 
+@app.get("/api/health")
+def health_check():
+    return {"status": "ok", "message": "API is working"}
+
 @app.post("/api/pull", response_model=PullsResponse)
 def pull_api(payload: PullRequest) -> PullsResponse:
     pulls = perform_pulls(count=payload.count, banner=payload.banner)
@@ -51,6 +55,11 @@ def pull_api(payload: PullRequest) -> PullsResponse:
 webapp_dir = os.path.join(os.path.dirname(__file__), "webapp")
 if os.path.isdir(webapp_dir):
     app.mount("/", StaticFiles(directory=webapp_dir, html=True), name="webapp")
+else:
+    # Fallback route for root
+    @app.get("/")
+    def read_root():
+        return {"message": "WebApp not found. Check webapp directory."}
 
 
 if __name__ == "__main__":
