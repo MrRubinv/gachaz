@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: gachaz-webapp
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn main:app -c gunicorn.conf.py
+    envVars:
+      - key: BOT_TOKEN
+        sync: false  # Set this manually in Render dashboard
+      - key: WEBAPP_URL
+        value: https://gachaz-webapp.onrender.com/
+    healthCheckPath: /api/health
