@@ -5,8 +5,8 @@ from telegram.ext import Application, CommandHandler, CallbackContext
 
 
 def get_webapp_url() -> str:
-    # For local dev, assume FastAPI serves at http://localhost:8000/
-    return os.environ.get("WEBAPP_URL", "http://localhost:8000/")
+    # Use Railway production URL
+    return os.environ.get("WEBAPP_URL", "https://gachaz-production.up.railway.app/")
 
 
 async def start(update: Update, context: CallbackContext) -> None:
