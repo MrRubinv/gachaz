@@ -40,7 +40,7 @@ app.add_middleware(
 
 @app.get("/api/health")
 def health_check():
-    return {"status": "ok", "message": "API is working"}
+    return {"status": "ok", "message": "API is working", "commit": "73c5154", "timestamp": "2025-10-18"}
 
 @app.post("/api/pull", response_model=PullsResponse)
 def pull_api(payload: PullRequest) -> PullsResponse:
