@@ -61,6 +61,12 @@ else:
     def read_root():
         return {"message": "WebApp not found. Check webapp directory."}
 
+# Also add a direct route for index.html
+@app.get("/index.html")
+def serve_index():
+    from fastapi.responses import FileResponse
+    return FileResponse(os.path.join(webapp_dir, "index.html"))
+
 
 if __name__ == "__main__":
     # Local dev server: python main.py
