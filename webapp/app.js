@@ -3,8 +3,49 @@ if (tg) {
   tg.expand();
 }
 
+let currentBanner = "standard";
+const BANNERS = {
+  "standard": {
+    title: "Стандартный баннер",
+    image: "https://admin.esports.gg/wp-content/uploads/2024/08/Jane-Doe-Upcoming-ZZZ-banner-1024x576.jpg",
+  },
+  "featured-ellen": {
+    title: "Выделенный: Эллен",
+    image: "https://i.imgur.com/Rnbjskv.jpeg"
+  },
+  "featured-lycaon": {
+    title: "Выделенный: Ликаон",
+    image: "https://i.imgur.com/J0D8Lls.jpeg"
+  },
+  "amplify-core": {
+    title: "Амплификация: Ядро",
+    image: "https://i.imgur.com/0hQ3xFY.jpeg"
+  },
+  "gang-channel": {
+    title: "Канал банду",
+    image: "https://i.imgur.com/0bF3n8Z.jpeg"
+  }
+};
+
+function applyBanner(bannerKey) {
+  currentBanner = bannerKey in BANNERS ? bannerKey : "standard";
+  const meta = BANNERS[currentBanner];
+  const imgEl = document.getElementById("bannerImage");
+  const titleEl = document.getElementById("bannerTitle");
+  if (imgEl) imgEl.src = meta.image;
+  if (titleEl) titleEl.textContent = meta.title;
+  // update selection state
+  document.querySelectorAll('.banner-item').forEach(btn => {
+    if (btn.getAttribute('data-banner') === currentBanner) {
+      btn.classList.add('selected');
+    } else {
+      btn.classList.remove('selected');
+    }
+  });
+}
+
 async function doPull(count) {
-  const payload = { count, banner: "standard" };
+  const payload = { count, banner: currentBanner };
   const res = await fetch("/api/pull", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -40,6 +81,20 @@ function render(results, summary) {
     summaryEl.textContent = `3★: ${summary.pulled3} | 4★: ${summary.pulled4} | 5★: ${summary.pulled5}`;
   }, results.length * 100 + 200);
 }
+
+// Banner item clicks
+const switcher = document.getElementById("bannerSwitcher");
+if (switcher) {
+  switcher.querySelectorAll('.banner-item').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const key = btn.getAttribute('data-banner');
+      applyBanner(key);
+    });
+  });
+}
+
+// Initialize banner state on load
+applyBanner(currentBanner);
 
 document.getElementById("pull1").addEventListener("click", async () => {
   try {

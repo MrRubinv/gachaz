@@ -21,6 +21,9 @@ html, body {
   margin: 0 auto;
   padding: 24px;
   position: relative;
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 16px;
 }
 
 .menu-container {
@@ -103,6 +106,7 @@ html, body {
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  grid-column: 2 / 3;
 }
 
 .banner-image {
@@ -271,6 +275,86 @@ button:hover {
 .summary {
   margin-top: 16px;
   font-weight: 600;
+}
+
+/* Banner Switcher */
+.banner-switcher {
+  grid-column: 1 / 2;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 60px; /* drops below menu */
+}
+
+.banner-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: linear-gradient(180deg, rgba(21,25,35,0.95), rgba(21,25,35,0.85));
+  border: 1px solid rgba(122,162,247,0.25);
+  border-radius: 14px;
+  padding: 10px 10px 10px 8px;
+  color: var(--text);
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.2s ease;
+}
+
+.banner-item .banner-emoji {
+  font-size: 22px;
+  width: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.banner-item .banner-label {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+
+.banner-item .label-top {
+  font-size: 10px;
+  color: #f6d34c;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+}
+
+.banner-item .label-bottom {
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.banner-item:hover {
+  transform: translateX(4px);
+  border-color: var(--accent);
+  box-shadow: 0 6px 20px rgba(122,162,247,0.25);
+}
+
+.banner-item.selected {
+  background: linear-gradient(180deg, rgba(24,28,40,0.95), rgba(24,28,40,0.9));
+  border-color: var(--accent);
+}
+
+/* Responsive adjustments */
+@media (max-width: 720px) {
+  .container {
+    grid-template-columns: 1fr;
+  }
+  .banner-switcher {
+    grid-column: 1 / 2;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 76px;
+  }
+  .banner-item {
+    flex: 1 1 calc(50% - 10px);
+  }
+  .banner-container {
+    grid-column: 1 / 2;
+  }
 }
 
 

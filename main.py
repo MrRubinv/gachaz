@@ -6,11 +6,29 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 from datetime import datetime, timezone
-from dotenv import load_dotenv
+from dotenv import load_dotenv, find_dotenv
 
 from utils.gacha import perform_pulls
 
-load_dotenv()
+
+def _safe_load_dotenv() -> bool:
+    try:
+        path = find_dotenv(usecwd=True)
+        if not path:
+            return False
+        # Detect UTF-16/UTF-32 BOM and skip if present
+        with open(path, "rb") as fh:
+            head = fh.read(4)
+        if head.startswith(b"\xff\xfe") or head.startswith(b"\xfe\xff") or head.startswith(b"\x00\x00\xfe\xff") or head.startswith(b"\xff\xfe\x00\x00"):
+            print("[warn] .env appears to have a BOM or non-UTF8 encoding; skipping load.")
+            return False
+        return load_dotenv(dotenv_path=path)
+    except Exception as e:
+        print(f"[warn] Failed to load .env: {e}")
+        return False
+
+
+_safe_load_dotenv()
 
 
 class PullRequest(BaseModel):
