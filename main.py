@@ -5,13 +5,17 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
+from datetime import datetime, timezone
+from dotenv import load_dotenv
 
 from utils.gacha import perform_pulls
 
+load_dotenv()
+
 
 class PullRequest(BaseModel):
-    count: int = Field(ge=1, le=10, description="ludka")
-    banner: str = Field(default="standard", description="Banner name: vivian")
+    count: int = Field(ge=1, le=10, description="Number of pulls to perform (1-10)")
+    banner: str = Field(default="standard", description="Banner name, e.g., 'standard'")
 
 
 class PullResult(BaseModel):
@@ -40,7 +44,9 @@ app.add_middleware(
 
 @app.get("/api/health")
 def health_check():
-    return {"status": "ok", "message": "API is working", "commit": "73c5154", "timestamp": "2025-10-18"}
+    commit = os.environ.get("RENDER_GIT_COMMIT") or os.environ.get("GIT_SHA") or "unknown"
+    ts = datetime.now(timezone.utc).isoformat()
+    return {"status": "ok", "message": "API is working", "commit": commit, "timestamp": ts}
 
 @app.post("/api/pull", response_model=PullsResponse)
 def pull_api(payload: PullRequest) -> PullsResponse:

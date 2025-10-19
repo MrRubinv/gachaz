@@ -21,10 +21,49 @@
         </div>
       </div>
 
+      <!-- Banner Switcher Sidebar -->
+      <div class="banner-switcher" id="bannerSwitcher">
+        <button class="banner-item selected" data-banner="standard" title="Стабильный">
+          <span class="banner-emoji">📺</span>
+          <div class="banner-label">
+            <div class="label-top">CHAINSL</div>
+            <div class="label-bottom">Стабильный</div>
+          </div>
+        </button>
+        <button class="banner-item" data-banner="featured-ellen" title="Выделенный">
+          <span class="banner-emoji">❄️</span>
+          <div class="banner-label">
+            <div class="label-top">CHAINSL</div>
+            <div class="label-bottom">Выделенный</div>
+          </div>
+        </button>
+        <button class="banner-item" data-banner="featured-lycaon" title="Выделенный">
+          <span class="banner-emoji">🐺</span>
+          <div class="banner-label">
+            <div class="label-top">CHAINSL</div>
+            <div class="label-bottom">Выделенный</div>
+          </div>
+        </button>
+        <button class="banner-item" data-banner="amplify-core" title="Амплификация">
+          <span class="banner-emoji">🌀</span>
+          <div class="banner-label">
+            <div class="label-top">CHAINSL</div>
+            <div class="label-bottom">Амплификация</div>
+          </div>
+        </button>
+        <button class="banner-item" data-banner="gang-channel" title="Канал банду">
+          <span class="banner-emoji">🧪</span>
+          <div class="banner-label">
+            <div class="label-top">CHAINSL</div>
+            <div class="label-bottom">Канал банду</div>
+          </div>
+        </button>
+      </div>
+
       <div class="banner-container">
-        <img src="https://admin.esports.gg/wp-content/uploads/2024/08/Jane-Doe-Upcoming-ZZZ-banner-1024x576.jpg" alt="ZZZ Banner" class="banner-image">
+        <img id="bannerImage" src="https://admin.esports.gg/wp-content/uploads/2024/08/Jane-Doe-Upcoming-ZZZ-banner-1024x576.jpg" alt="ZZZ Banner" class="banner-image">
         <div class="banner-overlay">
-          <h1>Стандартный баннер</h1>
+          <h1 id="bannerTitle">Стандартный баннер</h1>
           <div class="controls">
             <button id="pull1">Крутка x1</button>
             <button id="pull10">Крутка x10</button>
